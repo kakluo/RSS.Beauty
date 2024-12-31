@@ -1,0 +1,42 @@
+---
+import Layout from '@components/Layout.astro'
+
+const {
+  status = 500,
+  message = 'Internal Server Error',
+  link = '/',
+  linkText = 'Go back home',
+  icon = 'icon-[tabler--arrow-back-up]',
+} = Astro.props
+---
+
+<Layout title={`${status} | RSS.Beauty`} description={message}>
+  <div class="flex min-h-screen min-h-svh flex-col items-center justify-center">
+    <div class="relative mx-auto mb-16 px-6 md:max-w-2xl lg:max-w-5xl lg:px-12">
+      <div class="relative z-10 mx-auto text-center">
+        <div class="flex items-center justify-center divide-x">
+          <div class="relative z-10 flex h-32 w-32 items-center justify-center sm:h-40 sm:w-40">
+            <h1 class="relative text-5xl font-bold text-white sm:text-6xl">{status || 500}</h1>
+          </div>
+          <div class="px-4">
+            <p class="text-xl font-bold text-gray-700 sm:text-2xl dark:text-white">
+              {message}
+            </p>
+          </div>
+        </div>
+        <a
+          href={link}
+          aria-label={linkText}
+          class="before:shadow-primary relative mx-auto flex h-11 w-11 items-center justify-center before:absolute before:inset-0 before:rounded-full before:bg-white before:shadow-2xl before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:shadow-none dark:before:bg-gray-700"
+        >
+          <span class:list={['text-primary h-6 w-6 dark:text-white', icon]}></span>
+        </a>
+      </div>
+      <div
+        aria-hidden="true"
+        class="via-primaryLight dark:from-primary/40 absolute -top-16 left-8 h-64 w-40 -rotate-45 rounded-full bg-gradient-to-r from-green-400 to-purple-400 opacity-60 blur-2xl dark:via-sky-900 dark:to-indigo-900 dark:opacity-40"
+      >
+      </div>
+    </div>
+  </div>
+</Layout>

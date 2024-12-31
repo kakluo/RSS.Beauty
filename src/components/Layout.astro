@@ -1,0 +1,40 @@
+---
+import '../app.css'
+import { site } from '../config'
+import { SEO } from 'astro-seo'
+
+const { lang = 'en', title = site.title, description = site.description, seo = {} } = Astro.props
+---
+
+<html lang={lang} class="dark scroll-smooth" data-palette="tls" data-rounded="large" data-shade="900">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="preload" content="/favicon.ico" />
+    <SEO
+      title={title}
+      description={description}
+      noindex={seo.noindex}
+      nofollow={seo.nofollow}
+      openGraph={{
+        basic: {
+          type: 'website',
+          title: title,
+          image: site.image,
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        title: title,
+        description: description,
+        image: site.image,
+      }}
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.ico' }, ...(seo.link || [])],
+      }}
+    />
+  </head>
+  <body class="dark:bg-gray-950 min-h-screen min-h-svh font-sans leading-normal antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,16 @@
+@import './tailus.css';
+
+.dark {
+  --display-text-color: theme(colors.white);
+  --title-text-color: var(--display-text-color);
+  --caption-text-color: theme(colors.gray.500);
+  --body-text-color: theme(colors.gray.300);
+  --placeholder-text-color: theme(colors.gray.600);
+  --ui-border-color: #232323;
+}
+
+[data-shade='900']:where(.dark, .dark *),
+[data-shade='950']:where(.dark, .dark *),
+[data-shade='925']:where(.dark, .dark *) {
+  --ui-border-color: #383838;
+}

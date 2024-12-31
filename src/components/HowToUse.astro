@@ -1,0 +1,194 @@
+<section id="how-to-use" class="scroll-py-32 bg-white dark:bg-transparent relative z-10 mx-auto max-w-5xl px-6">
+  <div class="text-center pb-8 md:pb-16">
+    <h2 class="text-body text-balance text-xl font-semibold lg:text-2xl">How to Use</h2>
+  </div>
+
+  <div data-tabgroup="how-to-use" class="space-y-3 w-full md:w-2/3 mx-auto">
+    <div
+      role="tablist"
+      aria-labelledby="tablist-1"
+      data-tabs="pill"
+      class="mb-8 justify-around flex group gap-1 relative data-[tabs=default]:pb-1 data-[tabs=segmented]:bg-ui-soft data-[tabs=segmented]:p-1 data-[tabs=segmented]:rounded-[calc(var(--btn-radius)+0.25rem)] data-[tabs=default]:border-b data-[tabs=pill]:[--title-text-color:theme(colors.white)]"
+    >
+      <div
+        data-tabs-indicator
+        aria-hidden="true"
+        class="absolute group-data-[tabs=segmented]:inset-y-1 group-data-[tabs=pill]:inset-y-0 rounded-btn group-data-[tabs=segmented]:shadow group-data-[tabs=segmented]:bg-ui group-data-[tabs=pill]:bg-primary-600 group-data-[tabs=default]:top-auto group-data-[tabs=default]:-bottom-px group-data-[tabs=default]:h-0.5 group-data-[tabs=default]:bg-primary-600 duration-300 transition-[left,width]"
+      >
+      </div>
+      <button
+        id="tab-1"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="tabpanel-1"
+        class="btn sz-sm group-data-[tabs=default]:variant-ghost aria-[selected=true]:!text-title"
+      >
+        <span class="focus font-bold">Online</span>
+      </button>
+      <button
+        id="tab-2"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tabpanel-2"
+        tabindex="-1"
+        class="btn sz-sm group-data-[tabs=default]:variant-ghost aria-[selected=true]:!text-title"
+      >
+        <span class="focus font-bold">Base64</span>
+      </button>
+      <button
+        id="tab-3"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tabpanel-3"
+        tabindex="-1"
+        class="btn sz-sm group-data-[tabs=default]:variant-ghost aria-[selected=true]:!text-title"
+      >
+        <span class="focus font-bold">File</span>
+      </button>
+    </div>
+
+    <div id="tabpanel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+      <form action="/rss" method="get" class="space-y-6">
+        <input type="url" name="url" class="input variant-soft sz-lg" placeholder="Your RSS URL" />
+        <button type="submit" class="btn variant-primary w-full sz-lg md:w-1/3 mx-auto">Beauty</button>
+      </form>
+    </div>
+    <div id="tabpanel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class="hidden">
+      <div class="space-y-6">
+        <div class="text-caption">
+          Place the copied content at the RSS after <code class="badge sz-sm variant-neutral inline"
+            >&lt;?xml ...?&gt;</code
+          >
+        </div>
+        <div class="field base-64-field">
+          <label class="text-title" for="base-64-rss"
+            >For RSS <button class="float-right btn variant-soft sz-xs text-caption">Copy</button></label
+          >
+          <input id="base-64-rss" data-url="/rss.xsl" class="input variant-soft sz-lg" readonly />
+        </div>
+        <div class="field base-64-field">
+          <label class="text-title" for="base-64-atom"
+            >For Atom <button class="float-right btn variant-soft sz-xs text-caption">Copy</button></label
+          >
+          <input id="base-64-atom" data-url="/atom.xsl" class="input variant-soft sz-lg" readonly />
+        </div>
+      </div>
+    </div>
+    <div id="tabpanel-3" role="tabpanel" tabindex="0" aria-labelledby="tab-3" class="hidden">
+      <div class="text-caption space-y-4">
+        <p>
+          1. Download the <a class="link variant-animated intent-primary" title="RSS" download href="/rss.xsl">RSS</a> or
+          <a class="link variant-animated intent-primary" title="Atom" download href="/atom.xsl">Atom</a> style, and place
+          it in your static resource directory (cannot be cross-domain)
+        </p>
+        <p>
+          2. Add the following code in your RSS after <code class="badge sz-sm variant-neutral inline"
+            >&lt;?xml ...?&gt;</code
+          >: <button class="btn variant-soft sz-xs float-right" id="copy-rss-style">Copy</button>
+          <code class="badge sz-sm variant-neutral mt-4 break-all" id="rss-style-code"
+            >&lt;?xml-stylesheet type="text/xsl" href="/rss(or)atom.xsl"?&gt;</code
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import copy from 'copy-to-clipboard'
+    import { encode64 } from '../lib/base64'
+
+    function tabGroup() {
+      const tabGroups = document.querySelectorAll('[data-tabgroup]')
+
+      tabGroups.forEach((tabGroup) => {
+        const tabList = tabGroup.querySelector('[role="tablist"]') as HTMLElement
+        const tabs = tabList.querySelectorAll('[role="tab"]') as NodeListOf<HTMLButtonElement>
+        const tabPanels = tabGroup.querySelectorAll('[role="tabpanel"]')
+        const indicator = tabList.querySelector('[data-tabs-indicator]') as HTMLElement
+
+        function updateIndicator(selectedTab: HTMLButtonElement) {
+          const tabRect = selectedTab.getBoundingClientRect()
+          const tabListRect = tabList.getBoundingClientRect()
+          indicator.style.width = `${tabRect.width}px`
+          indicator.style.left = `${tabRect.left - tabListRect.left}px`
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const selectedTab = tab
+            const selectedPanelId = selectedTab.getAttribute('aria-controls')
+            const selectedPanel = document.getElementById(selectedPanelId as string) as HTMLElement
+
+            tabs.forEach((t) => {
+              t.setAttribute('aria-selected', 'false')
+              t.setAttribute('tabindex', '-1')
+            })
+            tabPanels.forEach((panel) => {
+              panel.classList.add('hidden')
+            })
+
+            selectedTab.setAttribute('aria-selected', 'true')
+            selectedTab.removeAttribute('tabindex')
+            selectedPanel.classList.remove('hidden')
+
+            updateIndicator(selectedTab)
+          })
+        })
+
+        const initialSelectedTab = tabList.querySelector('[aria-selected="true"]') as HTMLButtonElement
+        if (initialSelectedTab) {
+          updateIndicator(initialSelectedTab)
+        }
+      })
+    }
+
+    function getBase64URL(url: string) {
+      return `<?xml-stylesheet type="text/xsl" href="data:text/xsl;base64,${encode64(url)}"?>`
+    }
+
+    window.addEventListener('resize', () => {
+      requestAnimationFrame(() => {
+        tabGroup()
+      })
+    })
+
+    document.addEventListener('DOMContentLoaded', () => {
+      tabGroup()
+
+      Array.from(document.querySelectorAll('.base-64-field input')).forEach((input: HTMLInputElement) => {
+        fetch(input.dataset.url as string)
+          .then((response) => response.text())
+          .then((text) => {
+            input.value = getBase64URL(text)
+          })
+          .catch((error) => {
+            console.error('Error fetching XSL file:', error)
+          })
+      })
+
+      Array.from(document.querySelectorAll('.base-64-field button')).forEach((button) => {
+        const input = button.closest('.base-64-field')?.querySelector('input') as HTMLInputElement
+        button.addEventListener('click', () => {
+          copy(input.value)
+          button.textContent = 'Copied!'
+          setTimeout(() => {
+            button.textContent = 'Copy'
+          }, 2000)
+        })
+      })
+
+      document.getElementById('copy-rss-style')?.addEventListener('click', (event: MouseEvent) => {
+        const button = event.target as HTMLButtonElement
+        const input = document.getElementById('rss-style-code') as HTMLInputElement
+        copy(input.textContent)
+        button.textContent = 'Copied!'
+        setTimeout(() => {
+          button.textContent = 'Copy'
+        }, 2000)
+      })
+    })
+  </script>
+</section>

@@ -1,0 +1,68 @@
+---
+import FeaturesImage from './FeaturesImage.tsx'
+import { Picture } from 'astro:assets'
+import rss from '../assets/rss.png'
+import beauty from '../assets/beauty.png'
+---
+
+<section class="py-16">
+  <div class="mx-auto max-w-5xl px-6">
+    <FeaturesImage client:load>
+      <Picture slot="left" width={1948} height={1152} src={rss} formats={['avif', 'webp', 'png']} alt="RSS" />
+      <Picture slot="right" width={1948} height={1152} src={beauty} formats={['avif', 'webp', 'png']} alt="Beauty" />
+    </FeaturesImage>
+  </div>
+  <div class="mx-auto max-w-5xl px-6 mt-16 grid gap-6 *:text-center md:grid-cols-3 dark:[--ui-soft-bg:var(--ui-bg)]">
+    <div class="card variant-soft group">
+      <div
+        class="relative mx-auto size-36 duration-300 [--ui-border-color:theme(colors.gray.950/0.1)] group-hover:[--ui-border-color:theme(colors.gray.950/0.2)] dark:[--ui-border-color:theme(colors.white/0.15)] dark:group-hover:bg-primary-950 dark:group-hover:[--ui-border-color:theme(colors.white/0.2)]"
+      >
+        <div
+          class="absolute inset-0 bg-[linear-gradient(to_right,var(--ui-border-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--ui-border-color)_1px,transparent_1px)] bg-[size:24px_24px]"
+        >
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="bg-ui absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
+          <span class="size-6 icon-[tabler--macro-filled]"></span>
+        </div>
+      </div>
+      <h3 class="text-title mt-6 font-medium">Beautiful</h3>
+      <p class="mt-3 text-sm">Beautiful is our first principle</p>
+    </div>
+    <div class="card variant-soft group">
+      <div
+        class="relative mx-auto size-36 duration-300 [--ui-border-color:theme(colors.gray.950/0.1)] group-hover:[--ui-border-color:theme(colors.gray.950/0.2)] dark:[--ui-border-color:theme(colors.white/0.15)] dark:group-hover:bg-primary-950 dark:group-hover:[--ui-border-color:theme(colors.white/0.2)]"
+      >
+        <div
+          class="absolute inset-0 bg-[linear-gradient(to_right,var(--ui-border-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--ui-border-color)_1px,transparent_1px)] bg-[size:24px_24px]"
+        >
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="bg-ui absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
+          <span class="size-6 icon-[tabler--sun-filled]"></span>
+        </div>
+      </div>
+      <h3 class="text-title mt-6 font-medium">Compatibility</h3>
+      <p class="mt-3 text-sm">A time-tested technology that makes RSS shine again</p>
+    </div>
+    <div class="card variant-soft group">
+      <div
+        class="relative mx-auto size-36 duration-300 [--ui-border-color:theme(colors.gray.950/0.1)] group-hover:[--ui-border-color:theme(colors.gray.950/0.2)] dark:[--ui-border-color:theme(colors.white/0.15)] dark:group-hover:bg-primary-950 dark:group-hover:[--ui-border-color:theme(colors.white/0.2)]"
+      >
+        <div
+          class="absolute inset-0 bg-[linear-gradient(to_right,var(--ui-border-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--ui-border-color)_1px,transparent_1px)] bg-[size:24px_24px]"
+        >
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[--ui-soft-bg] via-transparent to-[--ui-soft-bg]"></div>
+        <div class="bg-ui absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">
+          <span class="size-6 icon-[tabler--brand-github-filled]"></span>
+        </div>
+      </div>
+      <h3 class="text-title mt-6 font-medium">Open Source</h3>
+      <p class="mt-3 text-sm">We believe in the power of open source and the community</p>
+    </div>
+  </div>
+</section>

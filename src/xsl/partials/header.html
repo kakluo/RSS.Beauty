@@ -1,0 +1,97 @@
+<header class="space-y-2 pt-2 md:pt-6">
+  <a title="{$title}" href="{$link}" target="_blank" rel="noopener noreferrer">
+    <h1 class="flex text-2xl">
+      <span class="icon-[tabler--rss] mr-2 h-8 w-8"></span>
+      <span
+        class="lg2:text-3xl from-primary-600 to-accent-400 inline-block bg-gradient-to-r bg-clip-text font-bold text-transparent"
+      >
+        <xsl:value-of select="$title" disable-output-escaping="yes" />
+      </span>
+    </h1>
+  </a>
+
+  <p class="text-body pt-2 text-lg py-4">
+    <xsl:value-of select="$description" disable-output-escaping="yes" />
+  </p>
+
+  <p class="text-caption text-sm">
+    This RSS feed for the
+    <a
+      class="link intent-neutral variant-animated !text-caption font-bold"
+      title="{$title}"
+      href="{$link}"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><xsl:value-of select="$title"
+    /></a>
+    website.
+  </p>
+
+  <p class="text-body text-sm hidden" id="subscribe-links">
+    You can subscribe this RSS feed by
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="Feedly"
+      data-href="https://feedly.com/i/subscription/feed/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Feedly</a
+    >,
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="Inoreader"
+      data-href="https://www.inoreader.com/feed/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Inoreader</a
+    >,
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="Newsblur"
+      data-href="https://www.newsblur.com/?url="
+      target="_blank"
+      rel="noopener noreferrer"
+      >Newsblur</a
+    >,
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="Follow"
+      data-href="follow://add?url="
+      rel="noopener noreferrer"
+      >Follow</a
+    >,
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="RSS Reader"
+      data-href="feed:"
+      data-raw="true"
+      rel="noopener noreferrer"
+      >RSS Reader</a
+    >
+    or
+    <a
+      class="link intent-neutral variant-animated font-bold"
+      title="{$title} 's feed source"
+      data-href=""
+      data-raw="true"
+      rel="noopener noreferrer"
+      >View Source</a
+    >.
+  </p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[data-href]').forEach(function (a) {
+        const url = new URL(location.href)
+        const feed = url.searchParams.get('url') || location.href
+        const raw = a.getAttribute('data-raw')
+        if (raw) {
+          a.href = a.getAttribute('data-href') + feed
+        } else {
+          a.href = a.getAttribute('data-href') + encodeURIComponent(feed)
+        }
+      })
+      document.getElementById('subscribe-links').classList.remove('hidden')
+    })
+  </script>
+</header>

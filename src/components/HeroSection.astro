@@ -1,0 +1,118 @@
+---
+import { site } from '../config'
+---
+
+<header>
+  <nav
+    id="navbar"
+    class="group fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-gray-950/50 lg:dark:bg-transparent"
+  >
+    <div class="m-auto max-w-5xl px-6">
+      <div class="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
+        <div class="flex w-full justify-between lg:w-auto">
+          <a href="/" aria-label="home" class="flex items-center space-x-2" title={site.title}>
+            <img loading="eager" src="/favicon.ico" alt={site.title} class="size-9 dark:invert" />
+            <span class="text-title text-xl font-semibold">{site.title}</span>
+          </a>
+          <button
+            id="menu-btn"
+            aria-label="open menu"
+            class="btn variant-ghost sz-md icon-only relative z-20 -mr-2.5 block cursor-pointer lg:hidden"
+          >
+            <svg
+              class="text-title m-auto size-6 transition-[transform,opacity] duration-300 group-data-[state=active]:rotate-180 group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+            </svg>
+            <svg
+              class="text-title absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 transition-[transform,opacity] duration-300 group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div
+          class="bg-ui mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-gray-300/20 group-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:group-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent"
+        >
+          <div class="lg:pr-4">
+            <ul class="space-y-6 text-base lg:flex lg:gap-6 lg:space-y-0 lg:text-sm">
+              <li>
+                <button id="share" class="text-body block hover:text-title">
+                  <span>Share</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit lg:border-l lg:pl-6">
+            <a
+              href="https://github.com/ccbikai/RSS.Beauty"
+              class="btn variant-soft sz-md lg:sz-xs hover:text-title"
+              title="GitHub"
+            >
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <div class="absolute inset-0 isolate z-[2] hidden contain-strict lg:block">
+    <div
+      class="absolute left-0 top-0 h-[1280px] w-[560px] -translate-y-[350px] -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]"
+    >
+    </div>
+    <div
+      class="absolute left-0 top-0 h-[1280px] w-[240px] -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]"
+    >
+    </div>
+    <div
+      class="absolute left-0 top-0 h-[1280px] w-[240px] -translate-y-[350px] -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]"
+    >
+    </div>
+  </div>
+
+  <section class="overflow-hidden bg-white dark:bg-transparent">
+    <div class="relative mx-auto max-w-5xl px-6 py-20 pt-32 lg:py-24">
+      <div class="relative z-10 mx-auto max-w-2xl text-center">
+        <h1
+          class="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl from-primary-600 to-accent-400 bg-gradient-to-r bg-clip-text text-transparent"
+        >
+          {site.description}
+        </h1>
+        <p class="text-body mx-auto mt-8 max-w-2xl text-xl">
+          Transform RSS feeds into beautiful reading formats for a better reading experience.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  const navbar = document.querySelector('#navbar') as HTMLElement
+  const btn = document.querySelector('#menu-btn') as HTMLButtonElement
+  const share = document.querySelector('#share') as HTMLButtonElement
+
+  btn.addEventListener('click', () => {
+    navbar.dataset.state = navbar.dataset.state === 'active' ? '' : 'active'
+  })
+
+  share.addEventListener('click', () => {
+    navigator.share({
+      url: window.location.href,
+      title: document.title,
+    })
+  })
+</script>

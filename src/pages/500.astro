@@ -1,0 +1,13 @@
+---
+import Error from '@components/Error.astro'
+
+const { error } = Astro.props
+---
+
+<Error
+  status={500}
+  message={error?.message || 'Internal Server Error'}
+  link="mailto:rss.beautry@miantiao.me"
+  linkText="Report Error"
+  icon="icon-[tabler--message-circle-question]"
+/>
