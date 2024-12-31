@@ -28,5 +28,5 @@ export async function getFeed(feedUrl, { headers = {} } = {}) {
     style = `<?xml-stylesheet type="text/xsl" href="/atom.xsl" ?>`
   }
 
-  return feedText.replace(/^(<\?xml .*\?>)?(.*)$/s, `$1${style}$2`)
+  return feedText.trim().replace(/^(<\?xml .*\?>)?(.*)$/s, `$1${style}$2`)
 }
