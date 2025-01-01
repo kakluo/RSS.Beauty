@@ -20,7 +20,7 @@ export async function GET(Astro) {
 
   return new Response(feed, {
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'text/xml',
       'Cache-Control': 'public, max-age=3600',
     },
   })
