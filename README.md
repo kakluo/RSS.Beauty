@@ -28,6 +28,19 @@ Visit [RSS.Beauty](https://rss.beauty) and enter any RSS feed URL to try it out.
 - [TailwindCSS](https://tailwindcss.com)
 - [XSLT](https://www.w3.org/TR/xslt/)
 
+## Deployment
+
+### Serverless
+
+Support deployment to Cloudflare Pages, Vercel, Netlify, etc. After [Fork](https://github.com/ccbikai/RSS.Beauty/fork) this project, follow the platform tutorial to deploy.
+
+### Docker
+
+```bash
+docker pull ghcr.io/ccbikai/rss.beauty:main
+docker run -d --name rss-beauty -p 4321:4321 ghcr.io/ccbikai/rss.beauty:main
+```
+
 ## Credits
 
 - [Tailus UI](https://html.tailus.io/)
