@@ -25,3 +25,8 @@ pnpm-debug.log*
 .wrangler/
 .vercel/
 .netlify/
+
+# public
+public/atom.xsl
+public/rss.xsl
+public/rss-beauty.css

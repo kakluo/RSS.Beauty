@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "tailwindcss -i src/app.css --content \"src/xsl/**/*\" -m -o public/rss-beauty.css && node scripts/xsl.js",
     "build": "astro build",
-    "postbuild": "tailwindcss -i src/app.css --content \"src/xsl/**/*\" -m -o dist/rss-beauty.css && node scripts/xsl.js",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
     "lint": "eslint .",
