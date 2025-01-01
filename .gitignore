@@ -23,3 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .wrangler/
+.vercel/
+.netlify/
+
+# public
+public/atom.xsl
+public/rss.xsl
+public/rss-beauty.css
