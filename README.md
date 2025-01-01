@@ -22,6 +22,8 @@ English | [简体中文](./README.zh-cn.md)
 
 Visit [RSS.Beauty](https://rss.beauty) and enter any RSS feed URL to try it out.
 
+Or visit <https://rss.beauty/rss?url=https%3A%2F%2Fgithub.com%2Fccbikai%2FRSS.Beauty%2Freleases.atom> to try it out.
+
 ## Tech Stack
 
 - [Astro](https://astro.build)

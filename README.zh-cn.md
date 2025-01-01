@@ -22,6 +22,8 @@
 
 访问 [RSS.Beauty](https://rss.beauty) 并输入任意 RSS 订阅源链接即可体验。
 
+或者访问 <https://rss.beauty/rss?url=https%3A%2F%2Fgithub.com%2Fccbikai%2FRSS.Beauty%2Freleases.atom>。
+
 ## 技术栈
 
 - [Astro](https://astro.build)
