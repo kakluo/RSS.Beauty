@@ -28,6 +28,9 @@ export default defineConfig({
   adapter: providers[adapterProvider] || providers.node,
   integrations: [tailwind(), react()],
   vite: {
+    ssr: {
+      noExternal: process.env.DOCKER ? !!process.env.DOCKER : undefined,
+    },
     publicDir: import.meta.env.PROD ? 'public' : 'dist',
     resolve: {
       // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
