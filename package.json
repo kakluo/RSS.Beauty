@@ -27,8 +27,11 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.12.1",
     "@astrojs/cloudflare": "^12.1.0",
+    "@astrojs/netlify": "^6.0.1",
+    "@astrojs/node": "^9.0.0",
     "@astrojs/react": "^4.1.2",
     "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/vercel": "^8.0.1",
     "@eslint-react/eslint-plugin": "^1.22.1",
     "@iconify-json/tabler": "^1.2.13",
     "@iconify/tailwind": "^1.2.0",
@@ -52,10 +55,10 @@
     "react-compiler-runtime": "19.0.0-beta-b2e8e9c-20241220",
     "sharp": "^0.33.5",
     "simple-git-hooks": "^2.11.1",
+    "std-env": "^3.8.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^3.4.17",
-    "tiny-glob": "^0.2.9",
-    "unenv": "^1.10.0"
+    "tiny-glob": "^0.2.9"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
