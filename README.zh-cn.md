@@ -32,6 +32,8 @@
 
 ## 部署
 
+详细的部署指南可查看 [部署指南](./docs/deployment-guide.zh-cn.md)。
+
 ### Serverless
 
 支持部署到 Cloudflare Pages, Vercel, Netlify 等平台，[Fork](https://github.com/ccbikai/RSS.Beauty/fork) 此项目后按平台教程操作即可。

@@ -1,7 +1,7 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  ignores: ['src/xslt/**/*', 'debug/**/*'],
+  ignores: ['docs'],
   formatters: true,
   astro: true,
   react: true,

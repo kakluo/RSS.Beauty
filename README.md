@@ -32,6 +32,8 @@ Or visit <https://rss.beauty/rss?url=https%3A%2F%2Fgithub.com%2Fccbikai%2FRSS.Be
 
 ## Deployment
 
+Detailed deployment guide can be found in [Deployment Guide](./docs/deployment-guide.md).
+
 ### Serverless
 
 Support deployment to Cloudflare Pages, Vercel, Netlify, etc. After [Fork](https://github.com/ccbikai/RSS.Beauty/fork) this project, follow the platform tutorial to deploy.
