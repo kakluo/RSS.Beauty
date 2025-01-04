@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "postinstall": "simple-git-hooks",
-    "predev": "npm run postbuild"
+    "predev": "npm run prebuild"
   },
   "dependencies": {
     "@tsparticles/engine": "^3.7.1",
