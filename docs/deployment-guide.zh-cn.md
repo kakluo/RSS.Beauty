@@ -1,32 +1,10 @@
 # RSS.Beauty 部署指南：Docker 与 Node.js 双剑合璧
 
-> 作者：[墨凡君]
-> 发布时间：2025-01-02
+> 作者：@mofanx
 
-大家好！今天我要为大家介绍一个非常棒的开源项目 —— RSS.Beauty。这是一个能让 RSS 阅读体验焕然一新的工具，它可以将普通的 RSS/Atom 订阅源转换成精美的阅读界面。
+## 部署指南
 
-## 项目简介
-
-RSS.Beauty 是基于 XSLT 技术开发的 RSS 美化工具，主要特性包括：
-
-- 🎨 精美的阅读界面设计
-- 🔄 支持 RSS 2.0 和 Atom 1.0 格式
-- 📱 响应式设计，完美支持移动端
-- 🔌 一键订阅到主流 RSS 阅读器
-- 🖥 支持多种部署方式
-
-## 技术栈
-
-项目采用现代化的前端技术栈：
-
-- Astro 作为主框架
-- React 构建用户界面
-- TailwindCSS 实现样式设计
-- XSLT 处理 RSS 转换
-
-## 部署方案
-
-今天我们主要介绍两种部署方式：Docker 部署和 Node.js 部署。这两种方式各有特色，大家可以根据自己的需求选择合适的方案。
+我们主要介绍两种部署方式：Docker 部署和 Node.js 部署。这两种方式各有特色，大家可以根据自己的需求选择合适的方案。
 
 ### 方案一：Docker 部署（简单快捷）
 
@@ -59,6 +37,7 @@ pnpm --version
 ```
 
 如果没有安装，可以：
+
 - Node.js：从 [Node.js 官网](https://nodejs.org/) 下载安装
 - pnpm：运行 `npm install -g pnpm` 安装
 
@@ -93,7 +72,7 @@ const providers = {
 }
 
 export default defineConfig({
-  adapter: providers[adapterProvider] || providers.node,  // 默认使用 node 适配器
+  adapter: providers[adapterProvider] || providers.node, // 默认使用 node 适配器
   // ...
 })
 ```
@@ -133,10 +112,12 @@ pm2 save
 ## 部署建议
 
 1. **选择建议**
+
    - 如果你不熟悉 Node.js 或追求快速部署，选择 Docker 方案
    - 如果你需要更多定制性或更轻量级的部署，选择 Node.js 方案
 
 2. **性能优化**
+
    - 建议配置 Nginx 反向代理
    - 可以启用 HTTPS
    - 考虑使用 CDN 加速静态资源
@@ -159,16 +140,18 @@ pm2 save
 如果您是 RSS 源的发布者，可以通过以下步骤为您的 RSS 源添加 RSS.Beauty 的样式：
 
 1. 下载样式文件
+
    - RSS 2.0 格式：访问 `http://your-domain.com/rss.xsl` 下载
    - Atom 格式：访问 `http://your-domain.com/atom.xsl` 下载
 
 2. 将样式文件放在您的静态资源目录中（注意：必须与 RSS 源在同一域名下）
 
 3. 在您的 RSS 文件头部添加以下代码（在 `<?xml ... ?>` 之后）：
+
    ```xml
    <!-- RSS 2.0 格式使用这个 -->
    <?xml-stylesheet type="text/xsl" href="/path/to/rss.xsl"?>
-   
+
    <!-- Atom 格式使用这个 -->
    <?xml-stylesheet type="text/xsl" href="/path/to/atom.xsl"?>
    ```
@@ -182,11 +165,9 @@ pm2 save
 3. 将复制的代码放在您的 RSS/Atom 文件的 `<?xml ...?>` 声明之后，例如：
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <?xml-stylesheet type="text/xsl" href="data:text/xsl;base64,PD94bWw..."?>
-<rss version="2.0">
-  ...
-</rss>
+<rss version="2.0">...</rss>
 ```
 
 这种方式的优点是不需要额外托管样式文件，样式代码直接嵌入在 RSS 文件中。
@@ -201,6 +182,7 @@ pm2 save
 2. 系统会自动获取并美化该 RSS 源的内容
 
 这种方式特别适合：
+
 - 无法修改原始 RSS 源的情况
 - 想要快速预览美化效果
 - 分享美化后的 RSS 源给他人
@@ -208,22 +190,26 @@ pm2 save
 ### 使用示例
 
 1. 美化 GitHub 项目的 Release 订阅源：
-   ```
+
+   ```txt
    http://your-domain.com/rss?url=https://github.com/username/project/releases.atom
    ```
 
 2. 美化个人博客的 RSS 源：
-   ```
+
+   ```txt
    http://your-domain.com/rss?url=https://your-blog.com/feed.xml
    ```
 
 ### 注意事项
 
 1. 跨域限制
+
    - 如果使用样式文件方式，XSL 文件必须与 RSS 源在同一域名下
    - 使用 Base64 或在线方式则没有此限制
 
 2. 性能考虑
+
    - Base64 方式会增加服务器负载，建议配置适当的缓存策略
    - 对于高流量网站，建议将样式文件放在 CDN 上
 
@@ -245,6 +231,7 @@ pm2 save
 ### 1. 最小化部署文件
 
 将以下必要文件复制到服务器：
+
 ```bash
 dist/                 # 构建后的主要文件
 package.json         # 包含依赖信息
@@ -278,33 +265,37 @@ HOST=0.0.0.0 PORT=4321 node ./dist/server/entry.mjs
 #### 方式二：使用 PM2 管理（生产环境推荐）
 
 1. 安装 PM2：
+
 ```bash
 npm install -g pm2
 ```
 
 2. 创建 PM2 配置文件 `ecosystem.config.js`：
+
 ```javascript
 module.exports = {
   apps: [{
-    name: "rss-beauty",
-    script: "./dist/server/entry.mjs",
-    instances: "max",         // 使用所有 CPU 核心
-    exec_mode: "cluster",     // 使用集群模式
+    name: 'rss-beauty',
+    script: './dist/server/entry.mjs',
+    instances: 'max', // 使用所有 CPU 核心
+    exec_mode: 'cluster', // 使用集群模式
     env: {
-      NODE_ENV: "production",
-      HOST: "0.0.0.0",       // 监听所有网络接口
-      PORT: 4321             // 指定端口
+      NODE_ENV: 'production',
+      HOST: '0.0.0.0', // 监听所有网络接口
+      PORT: 4321 // 指定端口
     }
   }]
 }
 ```
 
 3. 启动服务：
+
 ```bash
 pm2 start ecosystem.config.js
 ```
 
 4. 设置开机自启（可选）：
+
 ```bash
 pm2 startup
 pm2 save
@@ -316,18 +307,21 @@ pm2 save
 - 局域网访问：`http://你的局域网IP:4321`
   - 例如：`http://192.168.1.100:4321`
 
-### 注意事项
+### 注意
 
 1. **安全考虑**
+
    - 确保服务器防火墙已正确配置
    - 如果不需要局域网访问，建议保持默认的 localhost
    - 生产环境建议使用反向代理（如 Nginx）
 
 2. **性能优化**
+
    - 使用 PM2 的集群模式可以充分利用多核 CPU
    - 建议配置适当的缓存策略
 
 3. **故障排查**
+
    - 如果无法访问，检查防火墙设置
    - 确认服务器的 4321 端口是否开放
    - 检查环境变量是否正确设置
@@ -351,13 +345,3 @@ server {
     }
 }
 ```
-
-
-## 结语
-
-RSS.Beauty 是一个非常实用的工具，无论你选择哪种部署方式，都能轻松搭建起自己的 RSS 美化服务。如果你在部署过程中遇到任何问题，欢迎在评论区留言，我们一起讨论解决。
-
-## 相关链接
-
-- 项目地址：[https://github.com/ccbikai/RSS.Beauty](https://github.com/ccbikai/RSS.Beauty)
-- 在线演示：[https://rss.beauty](https://rss.beauty)
